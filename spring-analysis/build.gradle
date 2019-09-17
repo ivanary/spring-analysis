@@ -12,5 +12,9 @@ repositories {
 }
 
 dependencies {
+    compile(project(":spring-beans"))
+    compile(project(":spring-core"))
+    compile(project(":spring-tx"))
+    optional(project(":spring-context"))  // for JndiDataSourceLookup
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }

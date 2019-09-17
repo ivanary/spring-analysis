@@ -77,13 +77,20 @@ public class AnnotationConfigApplicationContext extends GenericApplicationContex
 	}
 
 	/**
+	 * 把JavaConfig
 	 * Create a new AnnotationConfigApplicationContext, deriving bean definitions
 	 * from the given annotated classes and automatically refreshing the context.
 	 * @param annotatedClasses one or more annotated classes,
 	 * e.g. {@link Configuration @Configuration} classes
 	 */
 	public AnnotationConfigApplicationContext(Class<?>... annotatedClasses) {
+		// 1. 首先调用父类 GenericApplicationContext 的无餐构造方法，创建Bean工厂
+		// 	  this.beanFactory = new DefaultListableBeanFactory()
+		// 2. 自身的构造方法初始化一个读取器和扫描器
+		//    reader AnnotatedBeanDefinitionReader
+		//    scan   ClassPathBeanDefinitionScanner
 		this();
+		//ac.register(AppConfig.class)
 		register(annotatedClasses);
 		refresh();
 	}
