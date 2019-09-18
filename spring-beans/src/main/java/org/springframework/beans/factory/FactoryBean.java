@@ -55,6 +55,12 @@ import org.springframework.lang.Nullable;
  * @see org.springframework.aop.framework.ProxyFactoryBean
  * @see org.springframework.jndi.JndiObjectFactoryBean
  */
+
+// 提供配置文件以外， 以编码的方式灵活配置Bean信息，实现此接口灵活的配置Bean信息
+	// 当Java Config Bean 的实现类是FactoryBean时 getBean() 方法返回的不是FactoryBean本身
+	// 而是FactoryBean#getObject()方法 所返回的对象 相当于FactoryBean#getObject()
+    // 代理了getBean方法
+	// 获取FactoryBean本身 getBean("&beanName")
 public interface FactoryBean<T> {
 
 	/**
@@ -74,6 +80,10 @@ public interface FactoryBean<T> {
 	 * @throws Exception in case of creation errors
 	 * @see FactoryBeanNotInitializedException
 	 */
+
+
+	// 返回FactoryBean 创建的Bean实例，如果isSingleton返回true，
+	// 则该实例会放到Spring容器中 单实例缓存池中
 	@Nullable
 	T getObject() throws Exception;
 
@@ -96,6 +106,7 @@ public interface FactoryBean<T> {
 	 * or {@code null} if not known at the time of the call
 	 * @see ListableBeanFactory#getBeansOfType
 	 */
+	// 返回FactoryBean创建的Bean的 类型
 	@Nullable
 	Class<?> getObjectType();
 
@@ -124,6 +135,7 @@ public interface FactoryBean<T> {
 	 * @see #getObject()
 	 * @see SmartFactoryBean#isPrototype()
 	 */
+	// 返回FactoryBean创建的Bean实例的作用域， 是singleton还是protoType
 	default boolean isSingleton() {
 		return true;
 	}
