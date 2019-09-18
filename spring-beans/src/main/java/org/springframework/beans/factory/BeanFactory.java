@@ -113,6 +113,8 @@ import org.springframework.lang.Nullable;
  * @see DisposableBean#destroy
  * @see org.springframework.beans.factory.support.RootBeanDefinition#getDestroyMethodName
  */
+// BeanFactory是用于访问Spring Bean容器的根接口，是一个单纯的Bean工厂
+// ，也就是常说的IOC容器的顶层定义，各种IOC容器是在其基础上为了满足不同需求而扩展的
 public interface BeanFactory {
 
 	/**

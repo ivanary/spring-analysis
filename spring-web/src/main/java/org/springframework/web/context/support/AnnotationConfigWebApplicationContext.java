@@ -192,11 +192,13 @@ public class AnnotationConfigWebApplicationContext extends AbstractRefreshableWe
 	 */
 	@Override
 	protected void loadBeanDefinitions(DefaultListableBeanFactory beanFactory) {
+		// 从BeanFactory中创建一个AnnotatedBeanDefinitionReader
 		AnnotatedBeanDefinitionReader reader = getAnnotatedBeanDefinitionReader(beanFactory);
+		// 从BeanFactory中创建一个ClassPathBeanDefinitionScanner
 		ClassPathBeanDefinitionScanner scanner = getClassPathBeanDefinitionScanner(beanFactory);
-
+		// 获取bean名字生成器
 		BeanNameGenerator beanNameGenerator = getBeanNameGenerator();
-		if (beanNameGenerator != null) {
+		if (beanNameGenerator != null) {// 创建bean名字生成器
 			reader.setBeanNameGenerator(beanNameGenerator);
 			scanner.setBeanNameGenerator(beanNameGenerator);
 			beanFactory.registerSingleton(AnnotationConfigUtils.CONFIGURATION_BEAN_NAME_GENERATOR, beanNameGenerator);
