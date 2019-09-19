@@ -130,6 +130,7 @@ public class AnnotatedBeanDefinitionReader {
 	 * @param annotatedClasses one or more annotated classes,
 	 * e.g. {@link Configuration @Configuration} classes
 	 */
+	// 注册一个或多个被注解修饰的java Config
 	public void register(Class<?>... annotatedClasses) {
 		for (Class<?> annotatedClass : annotatedClasses) {
 			registerBean(annotatedClass);
@@ -141,6 +142,7 @@ public class AnnotatedBeanDefinitionReader {
 	 * class-declared annotations.
 	 * @param annotatedClass the class of the bean
 	 */
+	// 根据类声明获取类的元数据，并注册Bean
 	public void registerBean(Class<?> annotatedClass) {
 		doRegisterBean(annotatedClass, null, null, null);
 	}

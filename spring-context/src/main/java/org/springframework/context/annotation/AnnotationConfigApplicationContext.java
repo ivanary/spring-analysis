@@ -90,7 +90,7 @@ public class AnnotationConfigApplicationContext extends GenericApplicationContex
 		//    reader AnnotatedBeanDefinitionReader
 		//    scan   ClassPathBeanDefinitionScanner
 		this();
-		//ac.register(AppConfig.class)
+		//ac.register(AppConfig.class)// 解析Bean元数据
 		register(annotatedClasses);
 		refresh();
 	}
