@@ -3,7 +3,6 @@ package org.springframework.analysis.bean.entity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.ejb.Init;
 
 
 public class PersonBean {
@@ -27,7 +26,6 @@ public class PersonBean {
 	public void send(){
 		System.out.println("I am send method from PersonBean!");
 	}
-	@Init
 	public void init() {
 		System.out.println("Init!");
 	}
