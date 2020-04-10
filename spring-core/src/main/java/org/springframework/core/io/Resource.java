@@ -41,13 +41,20 @@ import org.springframework.lang.Nullable;
  * @see #getURI()
  * @see #getFile()
  * @see WritableResource
- * @see ContextResource
- * @see UrlResource
- * @see FileUrlResource
+ * @see ContextResource 访问相对于Context 路径里的资源的实现类
+ * @see UrlResource 访问网络资源的实现类。
+ * @see FileUrlResource ：访问文件系统里资源的实现类。
  * @see FileSystemResource
- * @see ClassPathResource
- * @see ByteArrayResource
- * @see InputStreamResource
+ * @see ClassPathResource 访问类加载路径里资源的实现类。
+ * @see ByteArrayResource 访问字节数组资源实现类
+ * @see InputStreamResource 访问输入流资源的实现类
+ */
+
+/**
+ * Resource 和策略模式 Resource 接口就是策略模式的典型应用，
+ * Resource 接口就代表资源访问策略，但具体采用哪种策略实现，
+ * Resource 接口并不理会。客户端程序只和 Resource 接口耦合，并不知道底层采用何种资源访问策略，
+ * 这样应用可以在不同的资源访问策略之间自由切换。
  */
 public interface Resource extends InputStreamSource {
 
@@ -57,6 +64,7 @@ public interface Resource extends InputStreamSource {
 	 * existence of a {@code Resource} handle only guarantees a valid
 	 * descriptor handle.
 	 */
+	// 返回 Resource 所指向的资源是否存在。
 	boolean exists();
 
 	/**
@@ -78,6 +86,7 @@ public interface Resource extends InputStreamSource {
 	 * and must be read and closed to avoid resource leaks.
 	 * <p>Will be {@code false} for typical resource descriptors.
 	 */
+	// 返回资源文件是否打开，如果资源文件不能多次读取，每次读取结束应该显式关闭，以防止资源泄漏。
 	default boolean isOpen() {
 		return false;
 	}

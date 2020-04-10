@@ -113,6 +113,9 @@ public abstract class SpringFactoriesLoader {
 	 * @throws IllegalArgumentException if an error occurs while loading factory names
 	 * @see #loadFactories
 	 */
+	// spring.factories文件的格式为：key=value1,value2,value3
+	// 从所有的jar包中找到META-INF/spring.factories文件
+	// 然后从文件中解析出key=factoryClass类名称的所有value值
 	public static List<String> loadFactoryNames(Class<?> factoryClass, @Nullable ClassLoader classLoader) {
 		String factoryClassName = factoryClass.getName();
 		return loadSpringFactories(classLoader).getOrDefault(factoryClassName, Collections.emptyList());
@@ -125,13 +128,16 @@ public abstract class SpringFactoriesLoader {
 		}
 
 		try {
+			// 取得资源的URL
 			Enumeration<URL> urls = (classLoader != null ?
 					classLoader.getResources(FACTORIES_RESOURCE_LOCATION) :
 					ClassLoader.getSystemResources(FACTORIES_RESOURCE_LOCATION));
 			result = new LinkedMultiValueMap<>();
+			// 遍历所有urls
 			while (urls.hasMoreElements()) {
 				URL url = urls.nextElement();
 				UrlResource resource = new UrlResource(url);
+				// 根据资源文件URL解析properties文件
 				Properties properties = PropertiesLoaderUtils.loadProperties(resource);
 				for (Map.Entry<?, ?> entry : properties.entrySet()) {
 					String factoryClassName = ((String) entry.getKey()).trim();
